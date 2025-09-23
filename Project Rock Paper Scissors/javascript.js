@@ -1,36 +1,47 @@
-let name = "BORIS";
-let surname = "CUZMENCO";
 
-console.log(name);
-console.log(surname);
+let humanScore = 0;
+let computerScore = 0;
 
-let age = 11;
+function getComputerChoice() {
+    const choices = ["rock", "paper", "scissors"];
+    return choices[Math.floor(Math.random() * 3)];
+}
 
-console.log(age);
+function getHumanChoice(){
+    let input = prompt("Enter rock, paper or scissors: ").toLowerCase();
+    return input
+}
 
-age = 54;
+function playRound(humanChoice, computerChoice) {
+    let winner = "";
+    if (humanChoice === computerChoice) {
+        winner = "Draw!";
+    } else if (
+        (humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "scissors" && computerChoice === "paper") ||
+        (humanChoice === "paper" && computerChoice === "rock")
+    ) {
+        humanScore++;
+        winner = "You win!";
+    } else {
+        computerScore++;
+        winner = "You lost!";
+    }
+    return winner;
+}
 
-console.log(age);
+function playGame(number){
 
-const pi = 3.14;
-//pi = 10;
+    for (let i = 0; number >= i; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
 
-console.log(pi);
+        console.log(playRound(humanSelection, computerSelection));
+        console.log(`Score:\ You = ${humanScore}\ Bot = ${computerScore}`)
+    }
+}
 
-console.log((3 + 2) - 76 * (1 + 1));
+let gameInputRound = prompt("Enter the number of matches you want to play:");
+let number = Number(gameInputRound);
+playGame(number);
 
-console.log(23 + 97)
-console.log((4 + 6 + 9) / 77)
-
-//4
-let a = 10
-console.log(a)
-a = 20
-console.log(a)
-let b = 7 * a
-console.log(b)
-//5
-const max = 57
-const actual = max - 13
-const percentage = actual / max
-console.log(percentage)
