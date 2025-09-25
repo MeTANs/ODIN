@@ -7,11 +7,6 @@ function getComputerChoice() {
     return choices[Math.floor(Math.random() * 3)];
 }
 
-function getHumanChoice(){
-    let input = prompt("Enter rock, paper or scissors: ").toLowerCase();
-    return input
-}
-
 function playRound(humanChoice, computerChoice) {
     let winner = "";
     if (humanChoice === computerChoice) {
@@ -30,18 +25,17 @@ function playRound(humanChoice, computerChoice) {
     return winner;
 }
 
-function playGame(number){
-
-    for (let i = 0; number >= i; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-
-        console.log(playRound(humanSelection, computerSelection));
-        console.log(`Score:\ You = ${humanScore}\ Bot = ${computerScore}`)
-    }
+function playSelection(selection) {
+    const computerSelection = getComputerChoice();
+    const result = playRound(selection, computerSelection);
+    const score = document.getElementById("result");
+    score.textContent = `${result} | Score: You = ${humanScore}, Bot = ${computerScore}`;
+    score.style.fontSize = "24px";
 }
 
-let gameInputRound = prompt("Enter the number of matches you want to play:");
-let number = Number(gameInputRound);
-playGame(number);
-
+document.querySelectorAll(".btn").forEach(button => {
+    button.addEventListener("click", function() {
+        const selection = button.textContent.toLowerCase();
+        playSelection(selection);
+    });
+});
